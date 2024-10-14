@@ -43,6 +43,7 @@ IF '%ERRORLEVEL%' NEQ '0' (
 
 :MainVars
 SET "_NET_INTERFACE_NAME=Ethernet"
+:: By default, this is set to "Ethernet". Use the `ipconfig` command to discover your network interface names.
 
 :StartScript
 CHOICE /C SD /M "Set '%_NET_INTERFACE_NAME%' to [S]tatic IPs, or set as [D]HCP?"
@@ -74,10 +75,24 @@ netsh interface ipv4 add address "%_NET_INTERFACE_NAME%" 10.233.64.1 255.255.0.0
 netsh interface ipv4 add address "%_NET_INTERFACE_NAME%" 10.233.68.1 255.255.0.0
 netsh interface ipv4 add address "%_NET_INTERFACE_NAME%" 10.233.72.1 255.255.0.0
 netsh interface ipv4 add address "%_NET_INTERFACE_NAME%" 10.233.76.1 255.255.0.0
+netsh interface ipv4 add address "%_NET_INTERFACE_NAME%" 10.233.12.1 255.255.0.0
+netsh interface ipv4 add address "%_NET_INTERFACE_NAME%" 10.232.172.1 255.255.0.0
+
+netsh interface ipv4 add address "%_NET_INTERFACE_NAME%" 172.17.40.1 255.255.0.0
+netsh interface ipv4 add address "%_NET_INTERFACE_NAME%" 172.17.56.1 255.255.0.0
+netsh interface ipv4 add address "%_NET_INTERFACE_NAME%" 172.17.133.1 255.255.0.0
+netsh interface ipv4 add address "%_NET_INTERFACE_NAME%" 172.17.140.1 255.255.0.0
+netsh interface ipv4 add address "%_NET_INTERFACE_NAME%" 172.17.152.1 255.255.0.0
+netsh interface ipv4 add address "%_NET_INTERFACE_NAME%" 172.17.160.1 255.255.0.0
+
+
+
 
 GOTO End
 
 :End
+ipconfig /all
+ECHO:
 ECHO End of script.
 Pause
 EXIT
