@@ -46,6 +46,9 @@ GOTO MainVars
 
 
 :StartScript
+CLS
+ECHO:
+ECHO:
 CHOICE /C SD /M "Set '%_NET_INTERFACE_NAME%' to [S]tatic IPs, or set as [D]HCP?"
 IF ERRORLEVEL 2 GOTO SetDHCP & REM No./DHCP
 IF ERRORLEVEL 1 GOTO SetStaticIPs & REM Yes./Static
@@ -76,6 +79,9 @@ SET "_NET_INTERFACE_NAME=Ethernet"
 :: By default, this is set to "Ethernet". Use the `ipconfig` command to discover your network interface names.
 
 :StartScript
+CLS
+ECHO:
+ECHO:
 CHOICE /C SD /M "Set '%_NET_INTERFACE_NAME%' to [S]tatic IPs, or set as [D]HCP?"
 IF ERRORLEVEL 2 GOTO SetDHCP & REM No./DHCP
 IF ERRORLEVEL 1 GOTO SetStaticIPs & REM Yes./Static
@@ -93,9 +99,9 @@ ECHO Setting Static IPs:
 REM netsh interface ipv4 set address name="Ethernet" static 192.168.1.25 255.255.255.0 192.168.1.1
 
 :: Network 1:
-netsh interface ipv4 add address "%_NET_INTERFACE_NAME%" 192.168.0.25 255.255.255.0
-netsh interface ipv4 add address "%_NET_INTERFACE_NAME%" 192.168.1.25 255.255.255.0
-netsh interface ipv4 add address "%_NET_INTERFACE_NAME%" 192.168.120.40 255.255.255.0
+netsh interface ipv4 add address "%_NET_INTERFACE_NAME%" 192.168.0.2 255.255.255.0
+netsh interface ipv4 add address "%_NET_INTERFACE_NAME%" 192.168.1.2 255.255.255.0
+netsh interface ipv4 add address "%_NET_INTERFACE_NAME%" 192.168.120.49 255.255.255.0
 :: Network 2:
 netsh interface ipv4 add address "%_NET_INTERFACE_NAME%" 10.232.0.1 255.255.0.0
 netsh interface ipv4 add address "%_NET_INTERFACE_NAME%" 10.232.2.1 255.255.0.0
@@ -132,7 +138,6 @@ netsh interface ipv4 add address "%_NET_INTERFACE_NAME%" 10.232.168.1 255.255.0.
 netsh interface ipv4 add address "%_NET_INTERFACE_NAME%" 10.232.172.1 255.255.0.0
 netsh interface ipv4 add address "%_NET_INTERFACE_NAME%" 10.232.176.1 255.255.0.0
 netsh interface ipv4 add address "%_NET_INTERFACE_NAME%" 10.232.180.1 255.255.0.0
-
 
 netsh interface ipv4 add address "%_NET_INTERFACE_NAME%" 10.233.12.1 255.255.0.0
 netsh interface ipv4 add address "%_NET_INTERFACE_NAME%" 10.233.52.1 255.255.0.0
