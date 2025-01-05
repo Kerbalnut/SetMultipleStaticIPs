@@ -44,8 +44,32 @@ IF '%ERRORLEVEL%' NEQ '0' (
 :SkipChoosingInterface
 GOTO MainVars
 
+:MainVars
+SET "_NET_INTERFACE_NAME=Ethernet"
+:: By default, this is set to "Ethernet". Use the `ipconfig` command to discover your network interface names.
 
-:StartScript
+:: Get network interface names to choose from:
+:: wmic nic get AdapterType, Name, Installed, MACAddress, PowerManagementSupported, Speed
+
+:: netsh interface show interface
+:: netsh interface ipv4 show config "Wi-Fi"
+
+:: commandA && commandB || commandC
+:: commandA && ECHO Command succeeded! || ECHO Command failed.
+
+:: netsh interface ipv4 show config "Wi-Fi" >nul 2>&1 && ECHO Command succeeded! || ECHO Command failed. 
+:: netsh interface ipv4 show config "Wi-Few" >nul 2>&1 && ECHO Command succeeded! || ECHO Command failed. 
+
+netsh interface ipv4 show config "%_NET_INTERFACE_NAME%" >nul 2>&1 && ECHO Default interface selected '%_NET_INTERFACE_NAME%' || ECHO Selected interface does not exist! '%_NET_INTERFACE_NAME%'
+
+netsh interface ipv4 show config "%_NET_INTERFACE_NAME%"
+
+
+FOR /f "tokens=4 delims=(=" %%G IN ('%_cmd% ^|find "loss"') DO echo Result is [%%G]
+
+
+
+:ChooseInterface
 CHOICE /C SD /M "Set '%_NET_INTERFACE_NAME%' to [S]tatic IPs, or set as [D]HCP?"
 IF ERRORLEVEL 2 GOTO SetDHCP & REM No./DHCP
 IF ERRORLEVEL 1 GOTO SetStaticIPs & REM Yes./Static
@@ -53,29 +77,7 @@ IF ERRORLEVEL 1 GOTO SetStaticIPs & REM Yes./Static
 
 
 
-:: Get network interface names to choose from:
-:: wmic nic get AdapterType, Name, Installed, MACAddress, PowerManagementSupported, Speed
-
-netsh interface show interface
-
-netsh interface ipv4 show config "Wi-Fi"
-
-commandA && commandB || commandC
-
-commandA && ECHO Command succeeded! || ECHO Command failed.
-
-netsh interface ipv4 show config "Wi-Fi" && ECHO Command succeeded! || ECHO Command failed.
-netsh interface ipv4 show config "Wi-Few" && ECHO Command succeeded! || ECHO Command failed.
-
-netsh interface ipv4 show config "Wi-Fi" >nul 2>&1 && ECHO Command succeeded! || ECHO Command failed. 
-netsh interface ipv4 show config "Wi-Few" >nul 2>&1 && ECHO Command succeeded! || ECHO Command failed.
-
-
-:MainVars
-SET "_NET_INTERFACE_NAME=Ethernet"
-:: By default, this is set to "Ethernet". Use the `ipconfig` command to discover your network interface names.
-
-:StartScript
+:ChooseIPs
 CHOICE /C SD /M "Set '%_NET_INTERFACE_NAME%' to [S]tatic IPs, or set as [D]HCP?"
 IF ERRORLEVEL 2 GOTO SetDHCP & REM No./DHCP
 IF ERRORLEVEL 1 GOTO SetStaticIPs & REM Yes./Static
@@ -132,7 +134,6 @@ netsh interface ipv4 add address "%_NET_INTERFACE_NAME%" 10.232.168.1 255.255.0.
 netsh interface ipv4 add address "%_NET_INTERFACE_NAME%" 10.232.172.1 255.255.0.0
 netsh interface ipv4 add address "%_NET_INTERFACE_NAME%" 10.232.176.1 255.255.0.0
 netsh interface ipv4 add address "%_NET_INTERFACE_NAME%" 10.232.180.1 255.255.0.0
-
 
 netsh interface ipv4 add address "%_NET_INTERFACE_NAME%" 10.233.12.1 255.255.0.0
 netsh interface ipv4 add address "%_NET_INTERFACE_NAME%" 10.233.52.1 255.255.0.0
