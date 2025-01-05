@@ -44,21 +44,17 @@ IF '%ERRORLEVEL%' NEQ '0' (
 :SkipChoosingInterface
 GOTO MainVars
 
-:MainVars
-SET "_NET_INTERFACE_NAME=Ethernet"
-:: By default, this is set to "Ethernet". Use the `ipconfig` command to discover your network interface names.
-
-<<<<<<< HEAD
 :StartScript
 CLS
 ECHO:
 ECHO:
-=======
+CHOICE /C SD /M "Set '%_NET_INTERFACE_NAME%' to [S]tatic IPs, or set as [D]HCP?"
+IF ERRORLEVEL 2 GOTO SetDHCP & REM No./DHCP
+IF ERRORLEVEL 1 GOTO SetStaticIPs & REM Yes./Static
+:NOCHOICE
+
 :: Get network interface names to choose from:
 :: wmic nic get AdapterType, Name, Installed, MACAddress, PowerManagementSupported, Speed
-
-:: netsh interface show interface
-:: netsh interface ipv4 show config "Wi-Fi"
 
 :: commandA && commandB || commandC
 :: commandA && ECHO Command succeeded! || ECHO Command failed.
@@ -68,29 +64,16 @@ ECHO:
 
 netsh interface ipv4 show config "%_NET_INTERFACE_NAME%" >nul 2>&1 && ECHO Default interface selected '%_NET_INTERFACE_NAME%' || ECHO Selected interface does not exist! '%_NET_INTERFACE_NAME%'
 
-netsh interface ipv4 show config "%_NET_INTERFACE_NAME%"
-
-
-FOR /f "tokens=4 delims=(=" %%G IN ('%_cmd% ^|find "loss"') DO echo Result is [%%G]
-
-
-
-:ChooseInterface
->>>>>>> 540291ba85747898d9535268ce54223abbf945f3
-CHOICE /C SD /M "Set '%_NET_INTERFACE_NAME%' to [S]tatic IPs, or set as [D]HCP?"
-IF ERRORLEVEL 2 GOTO SetDHCP & REM No./DHCP
-IF ERRORLEVEL 1 GOTO SetStaticIPs & REM Yes./Static
-:NOCHOICE
-
-
-
-<<<<<<< HEAD
 :: Get network interface names to choose from:
 :: wmic nic get AdapterType, Name, Installed, MACAddress, PowerManagementSupported, Speed
+
+netsh interface ipv4 show config "%_NET_INTERFACE_NAME%"
 
 netsh interface show interface
 
 netsh interface ipv4 show config "Wi-Fi"
+
+FOR /f "tokens=4 delims=(=" %%G IN ('%_cmd% ^|find "loss"') DO echo Result is [%%G]
 
 commandA && commandB || commandC
 
@@ -103,17 +86,22 @@ netsh interface ipv4 show config "Wi-Fi" >nul 2>&1 && ECHO Command succeeded! ||
 netsh interface ipv4 show config "Wi-Few" >nul 2>&1 && ECHO Command succeeded! || ECHO Command failed.
 
 
+:ChooseInterface
+CHOICE /C SD /M "Set '%_NET_INTERFACE_NAME%' to [S]tatic IPs, or set as [D]HCP?"
+IF ERRORLEVEL 2 GOTO SetDHCP & REM No./DHCP
+IF ERRORLEVEL 1 GOTO SetStaticIPs & REM Yes./Static
+:NOCHOICE
+
+
 :MainVars
 SET "_NET_INTERFACE_NAME=Ethernet"
 :: By default, this is set to "Ethernet". Use the `ipconfig` command to discover your network interface names.
 
+:ChooseIPs
 :StartScript
 CLS
 ECHO:
 ECHO:
-=======
-:ChooseIPs
->>>>>>> 540291ba85747898d9535268ce54223abbf945f3
 CHOICE /C SD /M "Set '%_NET_INTERFACE_NAME%' to [S]tatic IPs, or set as [D]HCP?"
 IF ERRORLEVEL 2 GOTO SetDHCP & REM No./DHCP
 IF ERRORLEVEL 1 GOTO SetStaticIPs & REM Yes./Static
