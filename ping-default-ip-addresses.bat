@@ -13,7 +13,6 @@
 
 
 REM ECHO DEBUGGING: Begin RunAsAdministrator block.
-
 :RunAsAdministrator
 :: SS64 Run with elevated permissions script (ElevateMe.vbs)
 :: Thanks to: http://ss64.com/vb/syntax-elevate.html

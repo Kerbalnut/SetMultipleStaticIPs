@@ -15,8 +15,8 @@
 SET "_NET_INTERFACE_NAME=Ethernet"
 :: By default, this is set to "Ethernet". Use the `ipconfig` command to discover your network interface names.
 
-:RunAsAdministrator
 REM ECHO DEBUGGING: Begin RunAsAdministrator block.
+:RunAsAdministrator
 :: SS64 Run with elevated permissions script (ElevateMe.vbs)
 :: Thanks to: http://ss64.com/vb/syntax-elevate.html
 :-------------------------------------------------------------------------------
