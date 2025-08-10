@@ -120,17 +120,11 @@ GOTO ChooseIPs
 :: Get network interface names to choose from:
 :: wmic nic get AdapterType, Name, Installed, MACAddress, PowerManagementSupported, Speed
 
-netsh interface show interface
-
-netsh interface ipv4 show addresses
-
-netsh interface ipv4 show config "Wi-Fi"
-
-netsh interface ipv4 show config "%_NET_INTERFACE_NAME%"
-
-FOR /f "tokens=4 delims=(=" %%G IN ('%_cmd% ^|find "loss"') DO echo Result is [%%G]
-
-
+:: netsh interface show interface
+:: netsh interface ipv4 show addresses
+:: netsh interface ipv4 show config "Wi-Fi"
+:: netsh interface ipv4 show config "%_NET_INTERFACE_NAME%"
+:: FOR /f "tokens=4 delims=(=" %%G IN ('%_cmd% ^|find "loss"') DO echo Result is [%%G]
 
 :TypeInterfacece
 CLS
@@ -213,6 +207,7 @@ REM netsh interface ipv4 set address name="Ethernet" static 192.168.1.25 255.255
 netsh interface ipv4 add address "%_NET_INTERFACE_NAME%" 192.168.0.2 255.255.255.0
 netsh interface ipv4 add address "%_NET_INTERFACE_NAME%" 192.168.1.2 255.255.255.0
 netsh interface ipv4 add address "%_NET_INTERFACE_NAME%" 192.168.120.49 255.255.255.0
+netsh interface ipv4 add address "%_NET_INTERFACE_NAME%" 192.168.100.2 255.255.255.0
 :: Network 2:
 netsh interface ipv4 add address "%_NET_INTERFACE_NAME%" 10.37.199.2 255.255.252.0
 netsh interface ipv4 add address "%_NET_INTERFACE_NAME%" 10.170.0.66 255.255.255.192
