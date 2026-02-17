@@ -203,14 +203,29 @@ ECHO:
 ECHO Setting Static IPs:
 REM netsh interface ipv4 set address name="Ethernet" static 192.168.1.25 255.255.255.0 192.168.1.1
 
+:: Network 0 (APIPA):
+netsh interface ipv4 add address "%_NET_INTERFACE_NAME%" 169.254.0.1 255.255.0.0
+netsh interface ipv4 add address "%_NET_INTERFACE_NAME%" 192.168.90.1 255.255.255.0
+netsh interface ipv4 add address "%_NET_INTERFACE_NAME%" 192.168.213.3 255.255.255.0
+netsh interface ipv4 add address "%_NET_INTERFACE_NAME%" 192.168.226.3 255.255.255.0
+
+netsh interface ipv4 add address "%_NET_INTERFACE_NAME%" 172.17.165.1 255.255.255.0
+
+netsh interface ipv4 add address "%_NET_INTERFACE_NAME%" 172.19.19.1 255.255.255.0
+
 :: Network 1:
 netsh interface ipv4 add address "%_NET_INTERFACE_NAME%" 192.168.0.2 255.255.255.0
 netsh interface ipv4 add address "%_NET_INTERFACE_NAME%" 192.168.1.2 255.255.255.0
 netsh interface ipv4 add address "%_NET_INTERFACE_NAME%" 192.168.120.49 255.255.255.0
 netsh interface ipv4 add address "%_NET_INTERFACE_NAME%" 192.168.100.2 255.255.255.0
 :: Network 2:
+netsh interface ipv4 add address "%_NET_INTERFACE_NAME%" 10.170.0.126 255.255.255.192
+:: Network 3:
 netsh interface ipv4 add address "%_NET_INTERFACE_NAME%" 10.37.199.2 255.255.252.0
 netsh interface ipv4 add address "%_NET_INTERFACE_NAME%" 10.170.0.66 255.255.255.192
+netsh interface ipv4 add address "%_NET_INTERFACE_NAME%" 10.187.9.1 255.255.255.0
+netsh interface ipv4 add address "%_NET_INTERFACE_NAME%" 10.187.132.129 255.255.255.128
+:: Network 4:
 netsh interface ipv4 add address "%_NET_INTERFACE_NAME%" 10.232.0.1 255.255.252.0
 netsh interface ipv4 add address "%_NET_INTERFACE_NAME%" 10.232.2.1 255.255.252.0
 netsh interface ipv4 add address "%_NET_INTERFACE_NAME%" 10.232.4.1 255.255.252.0
