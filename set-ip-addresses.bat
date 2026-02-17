@@ -222,9 +222,11 @@ netsh interface ipv4 add address "%_NET_INTERFACE_NAME%" 192.168.100.2 255.255.2
 netsh interface ipv4 add address "%_NET_INTERFACE_NAME%" 10.170.0.126 255.255.255.192
 :: Network 3:
 netsh interface ipv4 add address "%_NET_INTERFACE_NAME%" 10.37.199.2 255.255.252.0
+netsh interface ipv4 add address "%_NET_INTERFACE_NAME%" 10.37.207.129 255.255.255.192
 netsh interface ipv4 add address "%_NET_INTERFACE_NAME%" 10.170.0.66 255.255.255.192
 netsh interface ipv4 add address "%_NET_INTERFACE_NAME%" 10.187.9.1 255.255.255.0
 netsh interface ipv4 add address "%_NET_INTERFACE_NAME%" 10.187.132.129 255.255.255.128
+netsh interface ipv4 add address "%_NET_INTERFACE_NAME%" 10.210.177.2 255.255.255.0
 :: Network 4:
 netsh interface ipv4 add address "%_NET_INTERFACE_NAME%" 10.232.0.1 255.255.252.0
 netsh interface ipv4 add address "%_NET_INTERFACE_NAME%" 10.232.2.1 255.255.252.0
